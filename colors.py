@@ -1,6 +1,6 @@
 blue = 'C0'
 black = 'k'
-red = 'C3'
+red = "red"
 green = 'C2'
 purple = 'C4'
 orange = 'C2'

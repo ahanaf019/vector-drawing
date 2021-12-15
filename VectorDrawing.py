@@ -2,7 +2,8 @@ import turtle
 import math
 import random
 import time
-
+import colors
+import c_maths
 
 class VectorDrawing:
     speed = 0
@@ -13,7 +14,7 @@ class VectorDrawing:
         self.speed = 0
         self.xunit = 10
         self.yunit = 10
-        self.color = "red"
+        self.color = colors.red
         turtle.hideturtle()
         turtle.Screen().title("Vector Drawing")
         turtle.tracer(0, 0)
@@ -93,15 +94,14 @@ class VectorDrawing:
         self.connect(prev, first)
         self.gfx_update()
 
-    def add(self, v1, v2):
-        return v1[0] + v2[0], v1[1] + v2[1]
+    
 
     def plot_points(self, points):
         for point in points:
             self.plot_point(point[0], point[1])
         turtle.update()
 
-    def set_color(self, clr="red"):
+    def set_color(self, clr=colors.red):
         self.color = clr
 
     def connect_points(self, points):
@@ -112,40 +112,6 @@ class VectorDrawing:
             prev = point
         turtle.update()
 
-    def scaler_multiple(self, v, m):
-        return (v[0] * m, v[1] * m)
-
-    def vector_components(self, v):
-        return (v[0], 0), (0, v[1])
-
-    def vector_length(self, v1):
-        res = math.sqrt(v1[0] ** 2 + v1[1] ** 2)
-        return res
-
-    def translate(self, tv, vectors):
-        results = []
-        for vector in vectors:
-            results.append(self.add(tv, vector))
-
-        return results
-
-    def subtract(self, v1, v2):
-        return self.add(v1, self.scaler_multiple(v2, -1))
-
-    def distance(self, v1, v2):
-        return math.sqrt((v1[0] - v2[0]) ** 2 + (v1[1] - v2[1]) ** 2)
-
-    def perimeter(self, vectors):
-        sum = 0
-        prev = 'a'
-        for vector in vectors:
-            if prev != 'a':
-                sum += self.distance(prev, vector)
-            else:
-                first = vector
-            prev = vector
-        sum += self.distance(prev, first)
-        return sum
 
     def draw_line(self, m, c):
         x1 = -2000
@@ -178,23 +144,12 @@ class VectorDrawing:
 
     def gfx_update(self):
         turtle.update()
-
-    def to_degrees(self, radians):
-        return (180 / math.pi) * radians
-
-    def to_radians(self, degrees):
-        return (math.pi / 180) * degrees
-
-    def polar_to_cartesian(self, r, angle):
-        return (r * math.cos(self.to_radians(angle)), r * math.sin(self.to_radians(angle)))
-
-    def cartesian_to_polar(self, point):
-        return self.vector_length(point), self.to_degrees(math.atan2(point[1], point[0]))
-
+    
+    # tales length and angle in degrees
     def plot_polar_point(self, r, angle):
-        x, y = self.polar_to_cartesian(r, angle)
+        x, y = c_maths.polar_to_cartesian(r, angle)
 
-        self.plot_point(x, y, 2)
+        self.plot_point(x, y)
         # self.color = "green"
         # self.connect((0,0), (x, y))
 
@@ -204,11 +159,7 @@ class VectorDrawing:
     def y_parallel_line(self, b):
         self.connect((-2000, b), (2000, b))
 
-    def rotate(self, v, angle):
-        r, ang = self.cartesian_to_polar(v)
-        print(angle, " ", ang)
-        ang += angle
-        return self.polar_to_cartesian(r, ang)
+    
 
     def refresh(self):
         time.sleep(1 / 30)
