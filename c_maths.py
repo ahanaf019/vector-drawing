@@ -19,7 +19,7 @@ def scaler_multiple(v, m):
 def vector_components(v):
     return (v[0], 0), (0, v[1])
 
-def vector_length(self, v1):
+def vector_length(v1):
     res = math.sqrt(v1[0] ** 2 + v1[1] ** 2)
     return res
 
@@ -55,4 +55,5 @@ def rotate(v, angle):
     r, ang = cartesian_to_polar(v)
     print(angle, " ", ang)
     ang += angle
+    print(polar_to_cartesian(r, ang))
     return polar_to_cartesian(r, ang)

@@ -1,4 +1,4 @@
-blue = 'C0'
+blue = 'blue'
 black = 'k'
 red = "red"
 green = 'C2'

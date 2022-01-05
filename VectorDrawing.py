@@ -67,7 +67,7 @@ class VectorDrawing:
         turtle.penup()
         turtle.setpos(x * self.xunit, y * self.yunit)
         turtle.dot(size, self.color)
-        # turtle.update()
+        turtle.update()
 
     def set_units(self, a, b):
         self.xunit = a
